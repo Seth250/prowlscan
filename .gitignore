@@ -133,3 +133,6 @@ dmypy.json
 
 # User files
 media/
+
+# Docker compose override
+docker-compose.override.yml
