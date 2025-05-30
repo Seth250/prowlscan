@@ -65,17 +65,17 @@ class Finding(TimeStampedModel):
     HIGH = 'high'
     MEDIUM = 'medium'
     LOW = 'low'
-    informational = 'informational'
+    INFORMATIONAL = 'informational'
 
     SEVERITY_CHOICES = [
         (CRITIICAL, _('Critical')),
         (HIGH, _('High')),
         (MEDIUM, _('Medium')),
         (LOW, _('Low')),
-        (informational, _('Informational')),
+        (INFORMATIONAL, _('Informational')),
     ]
 
     scan_check = models.ForeignKey(Check, related_name='findings', on_delete=models.CASCADE)  # django models have a field called 'check', so we use 'scan_check' to avoid conflict
     resource_id = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    severity = models.CharField(max_length=20, choices=SEVERITY_CHOICES, default=informational)
+    severity = models.CharField(max_length=20, choices=SEVERITY_CHOICES, default=INFORMATIONAL)
