@@ -1,9 +1,13 @@
+import logging
+
 from django.db import models, transaction
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+
+logger = logging.getLogger(__name__)
 
 # Create your models here.
 
@@ -45,14 +49,15 @@ class Scan(TimeStampedModel):
 
     def send_websocket_events(self):
         channel_layer = get_channel_layer()
-        group_name = f'scan_status'
+        group_name = f'scan_status_{self.id}'
 
         event = {
             'type': 'scan.message',
-            'id': self.id,
+            'status': self.status,
         }
 
         async_to_sync(channel_layer.group_send)(group_name, event)
+        logger.info(f'Triggered websocket event for scan status: {self.id}')
 
 
 class Check(TimeStampedModel):

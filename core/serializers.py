@@ -11,11 +11,8 @@ class ScanSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'status', 'created_at', 'updated_at', 'ended_at')
 
 
-class ScanStatusSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Scan
-        fields = ('status',)
+class ScanStatusSerializer(serializers.Serializer):
+    status = serializers.ChoiceField(choices=Scan.STATUS_CHOICES)
 
 
 class CheckSerializer(serializers.ModelSerializer):
