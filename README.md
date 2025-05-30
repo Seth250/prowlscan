@@ -9,7 +9,3 @@
 
 ### Documentation
 Swagger API Documentation is available at http://localhost/api/schema/swagger/
-
-
-### Note
-Could not properly complete tasks due to unforseen technical challenges
